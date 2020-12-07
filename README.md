@@ -1,6 +1,6 @@
 # README
 
-A basic script to pull all of the transactions out of the accounts in your app and save them to CSV.
+A basic script to pull all of the transactions out of the accounts in your RBS open banking sandbox app and save them to CSV.
 
 You can reconfigure the `APP_ID` and other query data by changing the variables at the top of `rbs-get-transactions.py`.
 
