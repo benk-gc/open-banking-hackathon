@@ -97,13 +97,6 @@ r = requests.get(RBS_API_URL + '/open-banking/v3.1/aisp/accounts',
                  },
                  verify=False)
 
-csv_headers = [
-    'TransactionId',
-    'BookingDateTime',
-    'Amount',
-    'Currency',
-]
-
 start = time.perf_counter()
 
 for account in r.json()['Data']['Account']:
@@ -112,13 +105,17 @@ for account in r.json()['Data']['Account']:
     print('Account id {0}'.format(ACCOUNT_ID))
 
     page = 0
-    transactions = []
     progress_bar = None
     csv_file = os.path.join(BASE_PATH, 'output', 'transactions-{0}.csv'.format(ACCOUNT_ID))
 
     with open(csv_file, 'w', newline='') as fh:
         csv_writer = csv.writer(fh)
-        csv_writer.writerow(csv_headers)
+        csv_writer.writerow([
+            'TransactionId',
+            'BookingDateTime',
+            'Amount',
+            'Currency',
+        ])
 
         while True:
             r = requests.get(RBS_API_URL + '/open-banking/v3.1/aisp/accounts/{0}/transactions'.format(ACCOUNT_ID),
@@ -145,11 +142,10 @@ for account in r.json()['Data']['Account']:
             if not progress_bar:
                 progress_bar = tqdm(total=int(total_pages))
 
+            progress_bar.update(1)
+
             if page >= total_pages:
-                progress_bar.update(1)
                 progress_bar.close()
                 break
-            else:
-                progress_bar.update(1)
 
 print('Operation took {:,.2f} seconds'.format(time.perf_counter() - start))
