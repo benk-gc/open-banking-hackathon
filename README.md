@@ -22,3 +22,10 @@ export RBS_CLIENT_SECRET="sadfASdasjioDJASOdjasoF"
 You'll also need to make sure the `APP_ID` in the script is updated to match your app.
 
 Then just run the script with `python rbs-get-transactions.py`.
+
+## API reference material
+
+- https://developer.sandbox.rbs.co.uk
+- https://www.bankofapis.com/products/natwest-group-open-banking/accounts/documentation/rbs/3.1.4
+- https://www.bankofapis.com/api/dynamic-content/v1.0/products/371967cf-41fc-46a8-9759-393194375814/native-loans/nwb/1.0.0/sandbox-swagger.json
+- https://sgerogia.github.io/OpenBanking-Part2
